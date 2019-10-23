@@ -16,7 +16,7 @@ def logino(request):
 def check(request):
      Uname=request.POST['login']
      Pword=request.POST['password']
-     res=authenticate(username=Uname,password=Pword)
+     res=authenticate(request,username=Uname,password=Pword)
      
 
      if res:
