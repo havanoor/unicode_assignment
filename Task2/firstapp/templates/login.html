@@ -1,0 +1,23 @@
+<html>
+
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+    <form action="check" method="GET" >
+        {% csrf_token %}
+        {{message}}<br>
+        Enter Login id:<input type="text" name="login"><br>
+        Enter Login id:<input type="password" name="password"><br>
+        <button type="submit">Login</button>
+
+
+    </form>
+
+
+
+
+</body>
+</html>
