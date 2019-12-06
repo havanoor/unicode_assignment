@@ -4,6 +4,7 @@ from django.db import models
 
 
 class Employee(models.Model):
+    
     Employee_id=models.CharField(primary_key=True,blank=False,max_length=30)
     Department=models.CharField(blank=False,max_length=30)
     Email=models.EmailField(blank=False,max_length=30)
@@ -12,14 +13,17 @@ class Employee(models.Model):
     Postion=models.CharField(blank=False,max_length=30)
 
 
+
+
+
 class MonthlySaving(models.Model):
-    Month=models.DateTimeField()
-    TotalSaved=models.IntegerField(blank=False)
+    Month=models.TextField()
+    TotalSaved=models.IntegerField(blank=False) 
     employee=models.ForeignKey('Employee',on_delete=models.CASCADE)
 
     
 class MonthlyExpense(models.Model):
-    Month=models.DateTimeField()
+    Month=models.TextField()
     TotalAmount=models.IntegerField(blank=False)
     employee=models.ForeignKey('Employee',on_delete=models.CASCADE)
 
@@ -41,6 +45,10 @@ class Jobs(models.Model):
     JobName=models.CharField(blank=True,max_length=40)
     Income=models.IntegerField()
     Increment=models.IntegerField()
+    employee=models.ForeignKey('Employee',on_delete=models.CASCADE)
+
+class Balance(models.Model):
+    Balance=models.IntegerField(blank=False)
     employee=models.ForeignKey('Employee',on_delete=models.CASCADE)
 
 

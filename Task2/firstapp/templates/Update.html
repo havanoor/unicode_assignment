@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title></title>
+</head>
+
+<body>
+
+    <form action="/done/" method="POST">
+        {% csrf_token %}
+        Month:<input type="text" name="month"><br>
+        Amount:<input type="text" name="amount"><br>
+        Employee code:<input type="text" name="code"><br>
+        <button type="submit">Update</button>
+ 
+    
+    </form>
+
+
+
+ 
+</body>
+
+
+</html>

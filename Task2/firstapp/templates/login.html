@@ -4,19 +4,20 @@
 <head>
     <title>Login</title>
 </head>
-
+ 
 <body>
     <form action="check/" method="POST" >
         {% csrf_token %}
         {{message}}<br>
         Enter Login id:<input type="text" name="login"><br>
         Enter Password:<input type="password" name="password"><br>
+        Enter Employee code:<input type="text" name="emp"><br>
         <button type="submit">Login</button>
-
+ 
 
     </form>
 
-<form action="/CreateUser/">
+<form action="CreateUser/">
     <button type="submit">Create new User</button>
     </form>
 

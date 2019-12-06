@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content%}
+
+<form action="/calc/{{val}}/" method="POST">
+   {% csrf_token %} 
+Enter Amount to {{val}}:<input type="number" name="val">
+Enter Employee code:<input type="text" name="code2">
+
+<button type="submit">{{val}}</button>
+
+
+</form>
+
+
+
+
+
+{% endblock %}
