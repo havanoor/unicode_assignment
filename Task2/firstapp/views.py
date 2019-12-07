@@ -120,13 +120,14 @@ def home(request,value1):
     user=models.Employee.objects.filter(Employee_id=value1)
 
     job=models.Jobs.objects.filter(employee=user[0])
+    amount=models.MonthlyExpense.objects.filter(employee=user[0])
     owner=models.Balance.objects.filter(employee=user[0])
     message="You have sufficient balance"
 
     if owner[0].Balance <1000:
         message="You have less balance!!"
 
-    val={'job':job,'owner':owner,'username':value1,'message':message}
+    val={'job':job,'owner':owner,'username':value1,'message':message,'amount':amount}
 
     return render(request,"home.html",val)
 
