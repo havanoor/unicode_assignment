@@ -74,6 +74,7 @@ def RegisterUser(request):
     bal=models.Balance()
     bal.Balance=0
     bal.employee=emp
+    bal.save()
 
  
     return HttpResponse("User created")
@@ -120,8 +121,12 @@ def home(request,value1):
 
     job=models.Jobs.objects.filter(employee=user[0])
     owner=models.Balance.objects.filter(employee=user[0])
+    message="You have sufficient balance"
 
-    val={'job':job,'owner':owner,'username':value1}
+    if owner[0].Balance <1000:
+        message="You have less balance!!"
+
+    val={'job':job,'owner':owner,'username':value1,'message':message}
 
     return render(request,"home.html",val)
 
@@ -134,6 +139,8 @@ def withdraw(request,value):
         return render(request,"Update.html")
     elif value=='add':
         return render(request,"withdraw.html",{'val':'add'})
+    elif value=='update':
+        return render(request,"job.html",{'status':'update'})
 
 
 def calc(request,value):
@@ -145,6 +152,9 @@ def calc(request,value):
         balance.Balance -=int(request.POST['val'] )
     elif value=='add':
         balance.Balance +=int(request.POST['val'] )
+
+    
+
     
     
     balance.save()
@@ -152,6 +162,41 @@ def calc(request,value):
 
     #return reverse("home" ,kwargs={'value1':employee})
     return HttpResponseRedirect(reverse("home" ,kwargs={'value1':employee}))
+
+
+def update(request):
+    
+     #empl=models.Employee.objects.filter(Employee_id=request.POST['code3'])
+    #print(empl)
+    #job=models.Jobs.objects.filter(employee=empl[0])
+    user=models.Employee.objects.filter(Employee_id=request.POST['code3'])
+
+    
+    
+    print(user[0])
+    #print(job)
+    
+    if 'Add' in request.POST:
+        newjob=models.Jobs()
+        newjob.Income=request.POST['income']
+        newjob.JobName=request.POST['jobname']
+        newjob.Increment=request.POST['increment']
+        newjob.employee=user[0]
+        newjob.save()
+    elif 'Remove' in request.POST:
+        job=models.Jobs.objects.filter(employee=user[0])
+        job.delete()
+        #job.save()
+
+    return HttpResponseRedirect(reverse("home" ,kwargs={'value1':request.POST['code3']}))
+        
+
+ 
+
+
+
+
+
 
 
     

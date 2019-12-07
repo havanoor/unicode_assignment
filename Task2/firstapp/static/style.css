@@ -18,6 +18,16 @@ table,th,td
 {
     border: 2px solid black;
     border-collapse: collapse;
+    padding: 20px ;
+}
+
+ li{
+    
+    line-height: 10px;
+    border :1px solid black;
+    display:inline-block;
+    width:300px;
+    padding: 10px;
 }
 
 .list 
@@ -34,20 +44,30 @@ table,th,td
     
 }
 
+.bal{
+    background-color: red;
+    color:white;
+    text-align: center;
 
-.heading li{
+}
+
+
+.heading {
 
     
     
     padding: 5px 20px;
     display: inline-block;
-    
+        
 } 
 
 
  li :hover
 {
     border: 2px solid black;
+    width:300px;
+    text-decoration: royalblue
+
     
     
 }
@@ -58,4 +78,8 @@ a{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size:15px;
     
+}
+.content
+{
+text-align: right;
 }

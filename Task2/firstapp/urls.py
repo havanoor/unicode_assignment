@@ -11,5 +11,6 @@ urlpatterns=[
     path('done/',views.update_value,name="updated"),
     path('home/<str:value1>/',views.home,name="home"),
     path('withdraw/<str:value>/',views.withdraw,name="withdraw"),
-    path('calc/<str:value>/',views.calc,name="cash")
+    path('calc/<str:value>/',views.calc,name="cash"),
+    path('profile/',views.update,name="update")
 ] 

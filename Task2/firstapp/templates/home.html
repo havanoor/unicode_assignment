@@ -12,7 +12,8 @@
         <p>
                 <div class="heading">
                     <ul class="list">
-                            <li><a href="{% url 'withdraw' value='withdraw' %}"><b>Withdraw Amount</b></a></li>
+                        <li><a href="{% url 'withdraw' value='update' %}"><b>Update Job profile</b></a></li>     
+                        <li><a href="{% url 'withdraw' value='withdraw' %}"><b>Withdraw Amount</b></a></li>
                             <li><a href="{% url 'withdraw' value='add' %}"><b>Add Amount</b></a></li>  
                         <li><a href="{% url 'withdraw' value='expense' %}"><b>Update Monthly Expense</b></a></li>
                         <li><a href="{% url 'logout' %}"><b>Logout</b></a></li>
@@ -20,14 +21,18 @@
                     </ul>
     
                 
-                <b><h1>Welcome Employee-{{username}}</b></h1>
-            </div>
-            </p>
-            <p>
-                    {% for val in owner %}
-                       <b><h3>Remaining Balance: {{val.Balance}}</h3></b>
-                    {% endfor %}
                 
+            </div>
+            
+            </p>
+            <p><div class="content">
+                    <b><h1>Welcome Employee-{{username}}</b></h1>
+                    {% for val in owner %}
+                    <b><h3>Remaining Balance: {{val.Balance}}</h3></b>
+                 {% endfor %}
+                                    <p class="bal"><b>{{message}}</b></p>
+                    
+                    </div>
                 </p>
         
     
@@ -39,11 +44,13 @@
             <tr>    
                 <th>Job Name</th>
                 <th>Salary</th>
+                <th>Increment</th>
             </tr>
             {% for jo in job %}
             <tr>
                 <td>{{jo.JobName}}</td>
                 <td>{{jo.Income}}</td>
+                <td>{{jo.Increment}}</td>
             </tr>
                 {% endfor %}       
             
