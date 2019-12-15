@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
 class Employee(models.Model):
-    
+    users=models.OneToOneField(User,on_delete=models.CASCADE,default=1)
     Employee_id=models.CharField(primary_key=True,blank=False,max_length=30)
     Department=models.CharField(blank=False,max_length=30)
     Email=models.EmailField(blank=False,max_length=30)
