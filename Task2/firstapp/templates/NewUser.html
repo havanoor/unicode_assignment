@@ -1,27 +1,27 @@
+{% load static %}
 <html>
 
 
-<head>
+<head><link rel="stylesheet" href="{% static  'style.css' %}" type="text/css">
     <title>Login</title>
 </head>
 
 <body>
-    <form action="/Register/" method="POST" >
+
+    <form  method="POST" >
+
         {% csrf_token %}
+        <div class='create_form'>
+            <h2><b>Create New User</b></h2>
+
         {{message}}<br>
-         Username:<input type="text" name="user"><br>
-         Password:<input type="password" name="password"><br>
-         Employee code:<input type="text" name="code"><br>
-         E-mail:<input type="email" name="email"><br>
-         Gender:<input type="text" name="gender"><br>
-         Date Of Birth:<input type="date" name="date"><br>
-         Position:<input type="text" name="pos"><br>
-         Department:<input type="text" name="dep"><br>
-         
+        
+        
+        <b>{{form.as_p}}</b>
 
         <button type="submit">Create User</button>
 
-
+            </div>
 
     </form>
 

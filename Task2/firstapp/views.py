@@ -7,40 +7,10 @@ from django.contrib.auth import logout
 from . import models
 from django.shortcuts import redirect
 from django.urls import reverse
+from .forms import new_user
 
 
-# Create your views here.
 
-
-def logino(request):  
-    
-    return render(request,"login.html")
-
-
-def check(request):
-     Uname=request.POST['login']
-     Pword=request.POST['password']
-     Empcode=request.POST['emp']
-     res=authenticate(request,username=Uname,password=Pword)
-
-     
-
-     if res:       
-         
-         
-
-         val={'username':Uname,'code':Empcode}
-         login(request,res)
-         return render(request,"logout.html",val)
-
-     else:
-         return render(request,"login.html",{'message':"Try Again"})
-
-def logouto(request):
-    logout(request)
-
-    #return render(request,"login.html",{'message':"Logged out"})
-    return redirect('login')
 
 def CreateUser(request):
 
@@ -115,21 +85,32 @@ def update_value(request):
     #return redirect('home')
     return HttpResponseRedirect(reverse("home" ,kwargs={'value1':employee}))
 
-def home(request,value1):
-   # k=value1.split(',')
-    user=models.Employee.objects.filter(Employee_id=value1)
+def home(request):
 
-    job=models.Jobs.objects.filter(employee=user[0])
-    amount=models.MonthlyExpense.objects.filter(employee=user[0])
-    owner=models.Balance.objects.filter(employee=user[0])
+   # k=value1.split(',')
+    t=request.user.username
+    print(t)
+
+
+   
+    current_user=models.Employee.objects.filter(users=User.objects.filter(username=t).first()).first()
+    print(current_user)
+
+    job=models.Jobs.objects.filter(employee=current_user)
+    amount=models.MonthlyExpense.objects.filter(employee=current_user)
+    owner=models.Balance.objects.filter(employee=current_user).first()
+    print(owner.Balance)
     message="You have sufficient balance"
 
-    if owner[0].Balance <1000:
-        message="You have less balance!!"
+    if owner.Balance <1000 :
+       message="You have less balance!!"
 
-    val={'job':job,'owner':owner,'username':value1,'message':message,'amount':amount}
+    val={'job':job,'owner':owner,'username':t,'message':message,'amount':amount,'id':current_user.Employee_id}
 
     return render(request,"home.html",val)
+    
+    
+    #return HttpResponse(request.user.username)
 
 
 def withdraw(request,value):
@@ -190,6 +171,38 @@ def update(request):
         #job.save()
 
     return HttpResponseRedirect(reverse("home" ,kwargs={'value1':request.POST['code3']}))
+
+
+
+def register(request):
+    form=new_user(request.POST)
+    if form.is_valid():
+        emp=models.Employee()
+        bal=models.Balance()
+        form.save()
+        t=form.cleaned_data['username']
+        print(t)
+        print(User.objects.filter(username=t).first())
+        emp.users=User.objects.filter(username=t).first()
+        #print(emp.users)
+        
+        emp.Employee_id=request.POST['Employee_id']
+        emp.Gender=request.POST['Gender']
+        emp.Department=request.POST['Department']
+        emp.Date_of_Birth=request.POST['date_of_birth']
+        bal.Balance=0
+        bal.users=User.objects.filter(username=t).first()
+        bal.employee=emp
+        emp.save()
+        bal.save()
+        
+        return redirect('login')
+
+    else :
+        form=new_user()
+
+    return render(request,'NewUser.html',{'form':form})
+
         
 
  

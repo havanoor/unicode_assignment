@@ -10,27 +10,32 @@
 
 <body>
         <p>
-                <div class="heading">
-                    <ul class="list">
+                <header>
+
+                    <img class='logo' src="" alt="BANKAPP"  >
+                    <nav>
+                    <ul class="nav_bar" >
                         <li><a href="{% url 'withdraw' value='update' %}"><b>Update Job profile</b></a></li>     
                         <li><a href="{% url 'withdraw' value='withdraw' %}"><b>Withdraw Amount</b></a></li>
-                            <li><a href="{% url 'withdraw' value='add' %}"><b>Add Amount</b></a></li>  
+                        <li><a href="{% url 'withdraw' value='add' %}"><b>Add Amount</b></a></li>  
                         <li><a href="{% url 'withdraw' value='expense' %}"><b>Update Monthly Expense</b></a></li>
                         <li><a href="{% url 'logout' %}"><b>Logout</b></a></li>
                        
                     </ul>
     
                 
-                
-            </div>
+                </nav>
+            </header>
             
             </p>
+            <br><br>
             <p><div class="content">
                     <b><h1>Welcome Employee-{{username}}</b></h1>
-                    {% for val in owner %}
-                    <b><h3>Remaining Balance: {{val.Balance}}</h3></b>
-                 {% endfor %}
-                                    <p class="bal"><b>{{message}}</b></p>
+                    <b><h1>Employee Id-{{id}}</h1></b>
+                 
+                    <b><h3>Remaining Balance: {{owner.Balance}}</h3></b>
+            
+                                   <div class='notify'><b>{{message}}</b></div>
                     
                     </div>
                 </p>
