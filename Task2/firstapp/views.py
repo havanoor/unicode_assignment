@@ -83,7 +83,7 @@ def update_value(request):
     
  #   return render(request,'logout.html')
     #return redirect('home')
-    return HttpResponseRedirect(reverse("home" ,kwargs={'value1':employee}))
+    return HttpResponseRedirect(reverse("home"))
 
 def home(request):
 
@@ -91,8 +91,7 @@ def home(request):
     t=request.user.username
     print(t)
 
-
-   
+    
     current_user=models.Employee.objects.filter(users=User.objects.filter(username=t).first()).first()
     print(current_user)
 
@@ -100,10 +99,12 @@ def home(request):
     amount=models.MonthlyExpense.objects.filter(employee=current_user)
     owner=models.Balance.objects.filter(employee=current_user).first()
     print(owner.Balance)
+
     message="You have sufficient balance"
 
-    if owner.Balance <1000 :
-       message="You have less balance!!"
+    if owner.Balance <1000:
+        
+        message="You have less balance!!"
 
     val={'job':job,'owner':owner,'username':t,'message':message,'amount':amount,'id':current_user.Employee_id}
 
@@ -143,7 +144,7 @@ def calc(request,value):
 
 
     #return reverse("home" ,kwargs={'value1':employee})
-    return HttpResponseRedirect(reverse("home" ,kwargs={'value1':employee}))
+    return HttpResponseRedirect(reverse("home" ))
 
 
 def update(request):
@@ -158,19 +159,19 @@ def update(request):
     print(user[0])
     #print(job)
     
-    if 'Add' in request.POST:
+    if 'add' in request.POST:
         newjob=models.Jobs()
         newjob.Income=request.POST['income']
         newjob.JobName=request.POST['jobname']
         newjob.Increment=request.POST['increment']
         newjob.employee=user[0]
         newjob.save()
-    elif 'Remove' in request.POST:
+    elif 'withdraw' in request.POST:
         job=models.Jobs.objects.filter(employee=user[0])
         job.delete()
         #job.save()
 
-    return HttpResponseRedirect(reverse("home" ,kwargs={'value1':request.POST['code3']}))
+    return HttpResponseRedirect(reverse("home"))
 
 
 
@@ -202,6 +203,10 @@ def register(request):
         form=new_user()
 
     return render(request,'NewUser.html',{'form':form})
+
+
+
+
 
         
 

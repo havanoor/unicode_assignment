@@ -14,4 +14,4 @@ urlpatterns=[
     path('calc/<str:value>/',user_views.calc,name="cash"),
     path('profile/',user_views.update,name="update"),
     path('new/',user_views.register,name='new')
-] 
+]    

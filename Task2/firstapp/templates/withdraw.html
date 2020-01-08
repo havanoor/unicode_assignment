@@ -4,8 +4,9 @@
 <form action="/calc/{{val}}/" method="POST">
    {% csrf_token %} 
 Enter Amount to {{val}}:<input type="number" name="val">
+<br>
 Enter Employee code:<input type="text" name="code2">
-
+<br><br>
 <button type="submit">{{val}}</button>
 
 
